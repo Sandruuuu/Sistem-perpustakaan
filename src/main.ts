@@ -1,4 +1,3 @@
-import 'dotenv/config'; // Harus di baris paling atas
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { AppModule } from './app.module';
@@ -6,6 +5,10 @@ import { AppModule } from './app.module';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  // Enable CORS
+  app.enableCors();
+
+  // Swagger configuration
   const config = new DocumentBuilder()
     .setTitle('Sistem Perpustakaan')
     .setDescription('API Documentation')
@@ -14,7 +17,7 @@ async function bootstrap() {
     .build();
 
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api', app, document);
+  SwaggerModule.setup('api/docs', app, document);
 
   const port = process.env.PORT || 3000;
   const host = '0.0.0.0';
