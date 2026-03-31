@@ -7,7 +7,7 @@ import { RolesGuard } from './guards/roles.guard';
 import { Roles } from './decorators/roles.decorator';
 import { UserRole } from '@prisma/client';
 
-@Controller('')
+@Controller('auth')
 export class AuthController {
   constructor(private authService: AuthService) {}
 
